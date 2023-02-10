@@ -4,6 +4,7 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
+    owner: 1001
   loop:
     - /etc/maria
     - /etc/maria/data
