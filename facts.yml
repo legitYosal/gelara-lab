@@ -2,7 +2,7 @@
     - all
   become: true
   tasks:
-    - name: gather network facts
+    - name: Gather network facts
       setup:
         gather_subset:
           - network

@@ -1,0 +1,21 @@
+---
+
+- name: Bootstrap cluster 
+  hosts: maria[0]
+  become: true
+  roles:
+    - gelara
+  vars:
+    bootstrap_cluster: true
+  tags:
+    - bootstrap
+
+- name: Add masters to cluster
+  hosts:
+    - "!maria[0]"
+    - maria
+  become: true
+  roles:
+    - gelara
+  tags:
+    - masters

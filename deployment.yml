@@ -1,6 +1,6 @@
 ---
 
-- name: setup forwarding on gateway
+- name: Setup forwarding on gateway
   hosts: gateway[0]
   become: true
   roles:
@@ -8,7 +8,7 @@
   tags:
     - forwarding
 
-- name: setup default route
+- name: Setup default route
   hosts: maria
   become: true
   roles:
@@ -16,7 +16,7 @@
   tags:
     - default-gateway
 
-- name: setup pre-requisites
+- name: Setup pre-requisites
   hosts: all
   become: true
   roles:
@@ -24,7 +24,7 @@
   tags:
     - common
 
-- name: install docker
+- name: Install docker
   hosts: all
   become: true
   roles:

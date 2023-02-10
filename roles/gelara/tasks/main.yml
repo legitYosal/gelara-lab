@@ -1,0 +1,50 @@
+---
+
+- name: Create directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - /etc/maria
+    - /etc/maria/data
+    - /etc/maria/docker-entrypoint-startdb.d
+    - /etc/maria/configs
+
+- name: Template fixtures
+  ansible.builtin.template:
+    src: my_custom.cnf.j2
+    dest: /etc/maria/configs/my_custom.cnf
+
+- name: Setup maria
+  community.docker.docker_container:
+    name: "mariadb"
+    image: "{{ mariadb_image }}"
+    network_mode: host
+    volumes:
+      - /etc/maria/data:/bitnami/mariadb:rw
+      - /etc/maria/docker-entrypoint-startdb.d:/docker-entrypoint-startdb.d:ro
+      - /etc/maria/configs:/opt/bitnami/mariadb/conf/:rw
+    env:
+      MARIADB_ROOT_USER: root
+      MARIADB_ROOT_PASSWORD: "{{ mariadb_root_password }}"
+      MARIADB_USER: default
+      MARIADB_DATABASE: default
+      MARIADB_PASSWORD: "{{ mariadb_password }}"
+      # MARIADB_GALERA_CLUSTER_NAME: mariadb-cluster
+      MARIADB_GALERA_MARIABACKUP_USER: backup
+      MARIADB_GALERA_MARIABACKUP_PASSWORD: "{{ mariadb_backup_password }}"
+      MARIADB_GALERA_CLUSTER_BOOTSTRAP: "{{ bootstrap_cluster | default(False) }}"
+      MARIADB_REPLICATION_USER: replication
+      MARIADB_REPLICATION_PASSWORD: "{{ mariadb_replication_password }}"
+      # MARIADB_GALERA_CLUSTER_ADDRESS: gcomm://
+    healthcheck:
+      test: ['CMD', '/opt/bitnami/scripts/mariadb-galera/healthcheck.sh']
+      interval: 15s
+      timeout: 5s
+      retries: 6
+
+- name: Wait until DB is available
+  ansible.builtin.wait_for: 
+    host: localhost
+    port: 3306
+    delay: 5
