@@ -23,3 +23,6 @@ ansible-playbook -i inventories/ini deployment.yml --ask-vault-pass
 cluster map:
 ```
 ```
+
+# MariaDB
+MariaDB have two storage backends named InnoDB and MyISAM, These two differ on their locking implementation: InnoDB locks the particular row in the table, and MyISAM locks the entire MySQL table. [source](https://stackoverflow.com/a/5414622/12131234)
