@@ -24,7 +24,7 @@
     volumes:
       - /etc/maria/data:/bitnami/mariadb:rw
       - /etc/maria/docker-entrypoint-startdb.d:/docker-entrypoint-startdb.d:ro
-      - /etc/maria/configs:/opt/bitnami/mariadb/conf/:rw
+      - /etc/maria/configs/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro
     env:
       MARIADB_ROOT_USER: "root"
       MARIADB_ROOT_PASSWORD: "{{ mariadb_root_password }}"
