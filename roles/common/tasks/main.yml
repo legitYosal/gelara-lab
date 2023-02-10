@@ -13,7 +13,7 @@
 
 - name: Add authorized keys
   ansible.posix.authorized_key:
-    user: "{{ ansible_user }}"
+    user: ubuntu
     state: present
     key: "{{ item }}"
   with_items: "{{ add_user_keys }}"
