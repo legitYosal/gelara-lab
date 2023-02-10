@@ -6,7 +6,7 @@
   roles:
     - gelara
   vars:
-    bootstrap_cluster: true
+    bootstrap_cluster: 'yes'
   tags:
     - bootstrap
 
