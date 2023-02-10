@@ -7,3 +7,6 @@
 [submodule "ansible_collections/ansible/posix"]
 	path = ansible_collections/ansible/posix
 	url = https://github.com/ansible-collections/ansible.posix.git
+[submodule "ansible_collections/community/docker"]
+	path = ansible_collections/community/docker
+	url = https://github.com/ansible-collections/community.docker.git
