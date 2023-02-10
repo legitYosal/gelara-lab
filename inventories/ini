@@ -1,0 +1,16 @@
+[docker-iran:children]
+gateway
+
+[docker:children]
+
+[gateway]
+gateway01 ansible_host=192.168.1.45 public_address=188.121.104.66
+
+[lb]
+lb01 ansible_host=192.168.1.85 public_address=37.32.5.185
+lb02 ansible_host=192.168.1.87 public_address=37.32.5.36
+
+[maria]
+master01 ansible_host=192.168.1.245
+master02 ansible_host=192.168.1.199
+master03 ansible_host=192.168.1.208

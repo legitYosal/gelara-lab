@@ -1,0 +1,57 @@
+---
+- name: Set timezone to Asia/Tehran
+  community.general.timezone:
+    name: Asia/Tehran
+
+- name: Set etc hosts
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    search_string: "{{ item }}"
+    line: "{{ hostvars[item].ansible_host }} {{ item }} # auto-generate"
+  loop: "{{ groups['all'] }}"
+
+- name: Add authorized keys
+  ansible.posix.authorized_key:
+    user: "{{ ansible_user }}"
+    state: present
+    key: "{{ item }}"
+  with_items: "{{ add_user_keys }}"
+
+- name: fix broken apt
+  ansible.builtin.apt:
+    state: fixed
+  
+- name: Update apt-cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 7200
+  changed_when: false
+
+- name: Gather the package facts
+  ansible.builtin.package_facts:
+    manager: auto
+  when: ansible_facts.package_facts is not defined
+
+- name: Install packages prerequisites
+  ansible.builtin.apt:
+    name: "{{ item.name }}"
+    state: "present"
+    update_cache: true
+    cache_valid_time: 7200
+    install-recommends: false
+  become: true
+  retries: 4
+  delay: 4
+  loop:
+    - name: python3
+    - name: python3-pip
+    - name: python3-venv
+    - name: python3-docker
+    - name: net-tools
+    - name: vim
+    - name: curl
+    - name: htop
+    - name: tcpdump
+    - name: tmux
+    - name: conntrack

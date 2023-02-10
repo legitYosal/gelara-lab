@@ -1,0 +1,9 @@
+[submodule "ansible_collections/ansible/utils"]
+	path = ansible_collections/ansible/utils
+	url = https://github.com/ansible-collections/ansible.utils.git
+[submodule "ansible_collections/community/general"]
+	path = ansible_collections/community/general
+	url = https://github.com/ansible-collections/community.general.git
+[submodule "ansible_collections/ansible/posix"]
+	path = ansible_collections/ansible/posix
+	url = https://github.com/ansible-collections/ansible.posix.git

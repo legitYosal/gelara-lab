@@ -1,0 +1,3 @@
+ansible-core==2.12
+netaddr
+six
