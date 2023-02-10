@@ -9,7 +9,9 @@
     - forwarding
 
 - name: Setup default route
-  hosts: maria
+  hosts: 
+    - maria
+    - lb
   become: true
   roles:
     - default-gateway
