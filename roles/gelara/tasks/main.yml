@@ -46,6 +46,6 @@
 
 - name: Wait until DB is available
   ansible.builtin.wait_for: 
-    host: localhost
+    host: "{{ hostvars[inventory_hostname].ansible_host }}"
     port: 3306
     delay: 5
