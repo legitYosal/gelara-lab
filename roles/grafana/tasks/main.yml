@@ -16,8 +16,8 @@
     volumes:
       - /etc/grafana/data:/var/lib/grafana:rw
     env:
-      - GF_SECURITY_ADMIN_USER: "admin"
-      - GF_SECURITY_ADMIN_PASSWORD: "{{ monitoring_admin_password }}"
+      GF_SECURITY_ADMIN_USER: "admin"
+      GF_SECURITY_ADMIN_PASSWORD: "{{ monitoring_admin_password }}"
     # healthcheck:
     #   test: ['CMD', '/opt/bitnami/scripts/grafana/healthcheck.sh']
     #   interval: 15s
