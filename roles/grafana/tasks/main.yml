@@ -14,7 +14,7 @@
     image: "{{ grafana_image }}"
     network_mode: host
     volumes:
-      - /etc/grafana/data:/var/lib/grafana:rw
+      - /etc/grafana/data:/var/lib/grafana:Z
     env:
       GF_SECURITY_ADMIN_USER: "admin"
       GF_SECURITY_ADMIN_PASSWORD: "{{ monitoring_admin_password }}"
