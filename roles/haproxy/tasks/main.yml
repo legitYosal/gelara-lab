@@ -22,7 +22,7 @@
     network_mode: host
     restart: "{{ config_template.changed }}"
     volumes:
-      - /etc/haproxy/haproxy.cfg:/bitnami/haproxy/conf/haproxy.cfg:ro
+      - /etc/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     # healthcheck:
     #   test: ['CMD', '/opt/bitnami/scripts/haproxy/healthcheck.sh']
     #   interval: 15s
