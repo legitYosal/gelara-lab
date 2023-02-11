@@ -12,7 +12,7 @@ defaults
         timeout server  50000
 
 userlist admincred
-	user admin insecure-password {{ monitoring_admin_password }}
+	user admin password {{ monitoring_admin_password }}
 
 # frontend grafana_frontend
 #     bind {{  hostvars[groups['gateway'].0].public_address }}:3000
@@ -29,7 +29,10 @@ frontend prometheus_frontend
     bind *:9090
     mode tcp
     option tcplog
-    default_backend prometheus_backend
+	acl authusers_acl http_auth(admincred) 
+	http-request auth realm prometheus_backend if !authusers_acl
+	default_backend prometheus_backend
+
 backend prometheus_backend
     mode tcp
     server prometheus {{ hostvars[groups['monitoring'].0].ansible_host }}:9090 check
