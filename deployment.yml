@@ -74,14 +74,14 @@
     - prometheus
     - monitoring
 
-# - name: Install grafana
-#   hosts: monitoring
-#   become: true
-#   roles:
-#     - grafana
-#   tags:
-#     - grafana
-#     - monitoring
+- name: Install grafana
+  hosts: monitoring
+  become: true
+  roles:
+    - grafana
+  tags:
+    - grafana
+    - monitoring
 
 - name: Deploy lbs
   hosts: lb
