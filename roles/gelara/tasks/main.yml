@@ -15,7 +15,6 @@
     name: "mariadb"
     image: "{{ mariadb_image }}"
     network_mode: host
-    restart: "{{ config_template.changed }}"
     volumes:
       - /etc/maria/data:/bitnami/mariadb:rw
       - /etc/maria/docker-entrypoint-startdb.d:/docker-entrypoint-startdb.d:ro

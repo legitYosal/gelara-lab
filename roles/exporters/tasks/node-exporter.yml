@@ -1,0 +1,10 @@
+---
+- name: deploy node-exporter
+  community.docker.docker_container:
+    image: "{{ node_exporter_image }}"
+    name: node-exporter
+    network_mode: host
+    volumes:
+      - /:/host:ro
+    command: "--path.rootfs=/host --web.listen-address={{ hostvars[inventory_hostname].ansible_host }}:9100"
+    restart_policy: unless-stopped

@@ -47,12 +47,11 @@ userlist admincred
 #     option ssl-hello-chk
 #     server grafana {{ hostvars[groups['gateway'].0].ansible_host }}:3000 check
 
-# frontend prometheus_frontend
-#     bind {{  hostvars[groups['gateway'].0].public_address }}:9092
-#     mode tcp
-#     option tcplog
-# 	http-request auth unless { http_auth(admincred) }
-#     default_backend prometheus_backend
-# backend prometheus_backend
-#     mode tcp
-#     server prometheus {{ hostvars[groups['gateway'].0].ansible_host }}:9092 check
+frontend prometheus_frontend
+    bind 0.0.0.0:9092
+    mode tcp
+    option tcplog
+    default_backend prometheus_backend
+backend prometheus_backend
+    mode tcp
+    server prometheus {{ hostvars[groups['monitoring'].0].ansible_host }}:9092 check

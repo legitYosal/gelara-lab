@@ -4,11 +4,15 @@ global:
 scrape_configs:
   - job_name: 'prometheus'
     static_configs:
-      - targets: ['monitoring:9090']
+      - targets: ['{{ hostvars['monitoring'].ansible_host }}:9090']
         labels:
           instance: monitoring
           address: {{ hostvars['monitoring'].ansible_host }}:9090
   - job_name: 'node_exporter'
     static_configs:
 {% for host in groups['all'] %}
-      - targets: ['']
+      - targets: ['{{ hostvars[host].ansible_host }}:9100']
+        labels:
+          instance: {{ host }}
+          address: {{ hostvars[host].ansible_host }}:9100
+{% endfor %}

@@ -56,6 +56,33 @@
     - masters
     - maria
 
+- name: Install exporters
+  hosts: all
+  become: true
+  roles:
+    - exporters
+  tags:
+    - exporters
+    - monitoring
+
+- name: Install prometheus
+  hosts: monitoring
+  become: true
+  roles:
+    - prometheus
+  tags: 
+    - prometheus
+    - monitoring
+
+# - name: Install grafana
+#   hosts: monitoring
+#   become: true
+#   roles:
+#     - grafana
+#   tags:
+#     - grafana
+#     - monitoring
+
 - name: Deploy lbs
   hosts: lb
   become: true
