@@ -47,4 +47,4 @@
     grafana_password: '{{ monitoring_admin_password }}'
     folder: General
     dashboard_id: 1860
-    dashbord_revision: 30
+    dashboard_revision: 30
