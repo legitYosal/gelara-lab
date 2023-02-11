@@ -15,7 +15,7 @@
     network_mode: host
     volumes:
       - /etc/grafana/data:/var/lib/grafana:rw
-    envs:
+    env:
       - GF_SECURITY_ADMIN_USER: "admin"
       - GF_SECURITY_ADMIN_PASSWORD: "{{ monitoring_admin_password }}"
     # healthcheck:
