@@ -24,17 +24,22 @@
     #   timeout: 5s
     #   retries: 6
 
-- name: Add default datasource
-  ansible.builtin.include_role:
-    name: grafana-config
-  vars:
-    grafana_datasources:
-      - name: prometheus
-        type: prometheus
-        access: proxy
-        url: 'http://{{ hostvars[inventory_hostname].ansible_host }}:9090'
-        basicAuth: false
-    grafana_dashboards:
-      - dashboard_id: 1860
-        revision_id: 30
-        datasource: prometheus
+- name: create prometheus datasource
+  community.grafana.grafana_datasource:
+    name: prometheus
+    grafana_url: 'http://{{ hostvars[inventory_hostname].ansible_host }}:3000'
+    grafana_user: 'admin'
+    grafana_password: '{{ monitoring_admin_password }}'
+    ds_type: prometheus
+    ds_url: 'http://{{ hostvars[inventory_hostname].ansible_host }}:9090'
+    access: proxy
+
+- name: Import Grafana dashboard node exporter
+  community.grafana.grafana_dashboard:
+    grafana_url: 'http://{{ hostvars[inventory_hostname].ansible_host }}:3000'
+    grafana_user: 'admin'
+    grafana_password: '{{ monitoring_admin_password }}'
+    folder: General
+    dashboard_id: 1860
+    dashbord_revision: 30
+
