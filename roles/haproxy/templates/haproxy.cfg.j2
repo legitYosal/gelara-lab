@@ -13,16 +13,12 @@ defaults
 userlist admincred
 	user admin password {{ monitoring_admin_password | string | password_hash('sha256') }}
 
-# frontend grafana_frontend
-#     bind {{  hostvars[groups['gateway'].0].public_address }}:3000
-#     mode tcp
-#     option tcplog
-#     http-request redirect scheme https unless { ssl_fc }
-#     default_backend grafana_backend
-# backend grafana_backend
-#     mode tcp
-#     option ssl-hello-chk
-#     server grafana {{ hostvars[groups['gateway'].0].ansible_host }}:3000 check
+frontend grafana_frontend
+    bind *:3000
+    mode http
+    default_backend grafana_backend
+backend grafana_backend
+    server grafana {{ hostvars[groups['monitoring'].0].ansible_host }}:3000 check
 
 frontend prometheus_frontend
     bind *:9090
