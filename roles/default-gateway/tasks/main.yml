@@ -12,3 +12,4 @@
 - name: set default gateway
   become: true
   ansible.builtin.command: "ip route add default via {{ default_gateway }}"
+  changed_when: false
