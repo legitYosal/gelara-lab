@@ -26,10 +26,10 @@ userlist admincred
 #     server grafana {{ hostvars[groups['gateway'].0].ansible_host }}:3000 check
 
 frontend prometheus_frontend
-    bind *:9092
+    bind *:9090
     mode tcp
     option tcplog
     default_backend prometheus_backend
 backend prometheus_backend
     mode tcp
-    server prometheus {{ hostvars[groups['monitoring'].0].ansible_host }}:9092 check
+    server prometheus {{ hostvars[groups['monitoring'].0].ansible_host }}:9090 check
