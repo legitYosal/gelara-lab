@@ -3,7 +3,7 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-    owner: 1001
+    mode: 0755
   loop:
     - /etc/grafana
     - /etc/grafana/data
@@ -14,7 +14,7 @@
     image: "{{ grafana_image }}"
     network_mode: host
     volumes:
-      - /etc/grafana/data:/var/lib/grafana:Z
+      - /etc/grafana/data:/var/lib/grafana:z
     env:
       GF_SECURITY_ADMIN_USER: "admin"
       GF_SECURITY_ADMIN_PASSWORD: "{{ monitoring_admin_password }}"
