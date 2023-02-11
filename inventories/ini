@@ -7,10 +7,12 @@ gateway
 gateway01 ansible_host=192.168.1.45 public_address=188.121.104.66
 
 [lb]
-lb01 ansible_host=192.168.1.98
-lb02 ansible_host=192.168.1.150
+lb01 ansible_host=192.168.1.121 public_address=37.32.5.118
 
 [maria]
 master01 ansible_host=192.168.1.245
 master02 ansible_host=192.168.1.199
 master03 ansible_host=192.168.1.208
+
+[monitoring]
+monitoring01 ansible_host=192.168.1.134

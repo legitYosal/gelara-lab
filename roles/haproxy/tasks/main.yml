@@ -1,31 +1,29 @@
 ---
-- name: Populate service facts
-  ansible.builtin.service_facts:
 
-- name: Stop nginx 
-  ansible.builtin.systemd:
-    name: nginx
-    state: stopped
-    enabled: false
-    force: true
-  when:
-    - "'nginx.service' in ansible_facts.services"
-    - ansible_facts.services['nginx.service'].state == 'running'
-
-- name: Update apt cache and install haproxy
-  ansible.builtin.apt:
-    name: "haproxy"
-    update_cache: true
-    cache_valid_time: 3600
-  retries: 3
-  delay: 10
-  become: true
+- name: Create directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: 1001
+  loop:
+    - /etc/haproxy
 
 - name: Configuring haproxy
   become: true
   ansible.builtin.template:
     src: haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
-    validate: haproxy -f %s -c -q
     mode: 0644
-  notify: Restart haproxy
+
+- name: Setup haproxy
+  community.docker.docker_container:
+    name: "haproxy"
+    image: "{{ haproxy_image }}"
+    network_mode: host
+    volumes:
+      - /etc/haproxy/haproxy.cfg:/bitnami/haproxy/conf/haproxy.cfg:ro
+    # healthcheck:
+    #   test: ['CMD', '/opt/bitnami/scripts/mariadb-galera/healthcheck.sh']
+    #   interval: 15s
+    #   timeout: 5s
+    #   retries: 6
