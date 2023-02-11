@@ -1,3 +1,2 @@
 ---
-
 haproxy_image: bitnami/haproxy:2.7.2-debian-11-r7
