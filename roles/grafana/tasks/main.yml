@@ -39,6 +39,7 @@
     ds_type: prometheus
     ds_url: 'http://{{ hostvars[inventory_hostname].ansible_host }}:9090'
     access: proxy
+  no_log: true
 
 - name: Import Grafana dashboard node exporter
   community.grafana.grafana_dashboard:
@@ -48,3 +49,4 @@
     folder: General
     dashboard_id: 1860
     dashboard_revision: 30
+  no_log: true
