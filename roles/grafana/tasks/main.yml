@@ -23,3 +23,18 @@
     #   interval: 15s
     #   timeout: 5s
     #   retries: 6
+
+- name: Add default datasource
+  ansible.builtin.include_role:
+    name: grafana-config
+  vars:
+    grafana_datasources:
+      - name: prometheus
+        type: prometheus
+        access: proxy
+        url: 'http://{{ hostvars[inventory_hostname].ansible_host }}:9090'
+        basicAuth: false
+    grafana_dashboards:
+      - dashboard_id: 1860
+        revision_id: 30
+        datasource: prometheus

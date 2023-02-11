@@ -10,3 +10,6 @@
 [submodule "ansible_collections/community/docker"]
 	path = ansible_collections/community/docker
 	url = https://github.com/ansible-collections/community.docker.git
+[submodule "roles/grafana-config"]
+	path = roles/grafana-config
+	url = https://github.com/cloudalchemy/ansible-grafana.git
