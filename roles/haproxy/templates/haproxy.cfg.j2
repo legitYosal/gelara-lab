@@ -28,8 +28,7 @@ userlist admincred
 frontend prometheus_frontend
     bind *:9090
     mode http
-	acl authusers_acl http_auth(admincred) 
-	http-request auth realm prometheus_backend if !authusers_acl
+	http-request auth unless { http_auth(admincred) }
 	default_backend prometheus_backend
 
 backend prometheus_backend
