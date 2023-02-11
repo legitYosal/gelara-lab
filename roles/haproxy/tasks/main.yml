@@ -4,7 +4,6 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-    owner: 1001
   loop:
     - /etc/haproxy
 
@@ -14,16 +13,18 @@
     src: haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
     mode: 0644
+  register: config_template
 
 - name: Setup haproxy
   community.docker.docker_container:
     name: "haproxy"
     image: "{{ haproxy_image }}"
     network_mode: host
+    restart: "{{ config_template.changed }}"
     volumes:
       - /etc/haproxy/haproxy.cfg:/bitnami/haproxy/conf/haproxy.cfg:ro
     # healthcheck:
-    #   test: ['CMD', '/opt/bitnami/scripts/mariadb-galera/healthcheck.sh']
+    #   test: ['CMD', '/opt/bitnami/scripts/haproxy/healthcheck.sh']
     #   interval: 15s
     #   timeout: 5s
     #   retries: 6

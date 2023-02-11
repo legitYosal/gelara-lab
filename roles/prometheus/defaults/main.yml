@@ -1,0 +1,3 @@
+---
+
+prometheus_image: bitnami/prometheus:2.42.0-debian-11-r3

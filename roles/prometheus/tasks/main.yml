@@ -1,0 +1,33 @@
+---
+
+- name: Create directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: 1001
+  loop:
+    - /etc/prometheus
+    - /etc/prometheus/data
+
+- name: Configuring prometheus
+  become: true
+  ansible.builtin.template:
+    src: prometheus.yml.j2
+    dest: /etc/prometheus/prometheus.yml
+    mode: 0644
+  register: config_template
+
+- name: Setup prometheus
+  community.docker.docker_container:
+    name: "prometheus"
+    image: "{{ prometheus_image }}"
+    network_mode: host
+    restart: "{{ config_template.changed }}"
+    volumes:
+      - /etc/prometheus/data:/opt/bitnami/prometheus/data:rw
+      - /etc/prometheus/prometheus.yml:/opt/bitnami/prometheus/conf/prometheus.yml:ro
+    # healthcheck:
+    #   test: ['CMD', '/opt/bitnami/scripts/prometheus/healthcheck.sh']
+    #   interval: 15s
+    #   timeout: 5s
+    #   retries: 6

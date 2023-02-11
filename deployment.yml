@@ -11,7 +11,7 @@
 - name: Setup default route
   hosts: 
     - maria
-    - lb
+    - monitoring
   become: true
   roles:
     - default-gateway

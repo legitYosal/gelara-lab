@@ -1,0 +1,31 @@
+---
+
+- name: Create directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: 1001
+  loop:
+    - /etc/grafana
+
+# - name: Configuring grafana
+#   become: true
+#   ansible.builtin.template:
+#     src: grafana.cfg.j2
+#     dest: /etc/grafana/grafana.cfg
+#     mode: 0644
+#   register: config_template
+
+- name: Setup grafana
+  community.docker.docker_container:
+    name: "grafana"
+    image: "{{ grafana_image }}"
+    network_mode: host
+    # restart: "{{ config_template.changed }}"
+    volumes:
+      # - /etc/grafana/grafana.cfg:/bitnami/grafana/conf/grafana.cfg:ro
+    # healthcheck:
+    #   test: ['CMD', '/opt/bitnami/scripts/grafana/healthcheck.sh']
+    #   interval: 15s
+    #   timeout: 5s
+    #   retries: 6
