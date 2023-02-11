@@ -24,6 +24,12 @@
     #   timeout: 5s
     #   retries: 6
 
+- name: Wait until grafana is available
+  ansible.builtin.wait_for: 
+    host: "{{ hostvars[inventory_hostname].ansible_host }}"
+    port: 3000
+    delay: 5
+
 - name: create prometheus datasource
   community.grafana.grafana_datasource:
     name: prometheus
@@ -42,4 +48,3 @@
     folder: General
     dashboard_id: 1860
     dashbord_revision: 30
-

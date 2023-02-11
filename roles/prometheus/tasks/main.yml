@@ -31,3 +31,9 @@
     #   interval: 15s
     #   timeout: 5s
     #   retries: 6
+
+- name: Wait until prometheus is available
+  ansible.builtin.wait_for: 
+    host: "{{ hostvars[inventory_hostname].ansible_host }}"
+    port: 9090
+    delay: 5
