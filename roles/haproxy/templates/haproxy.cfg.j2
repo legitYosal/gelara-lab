@@ -27,12 +27,10 @@ userlist admincred
 
 frontend prometheus_frontend
     bind *:9090
-    mode tcp
-    option tcplog
+    mode http
 	acl authusers_acl http_auth(admincred) 
 	http-request auth realm prometheus_backend if !authusers_acl
 	default_backend prometheus_backend
 
 backend prometheus_backend
-    mode tcp
     server prometheus {{ hostvars[groups['monitoring'].0].ansible_host }}:9090 check
