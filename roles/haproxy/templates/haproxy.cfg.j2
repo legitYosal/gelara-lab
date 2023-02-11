@@ -12,7 +12,7 @@ defaults
         timeout server  50000
 
 userlist admincred
-	user admin password {{ monitoring_admin_password }}
+	user admin password {{ monitoring_admin_password | string | password_hash('sha256') }}
 
 # frontend grafana_frontend
 #     bind {{  hostvars[groups['gateway'].0].public_address }}:3000
