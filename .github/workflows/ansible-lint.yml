@@ -1,0 +1,28 @@
+name: Ansible Lint
+
+on:
+  push:
+    paths:
+      - "inventories/**"
+      - "roles/**"
+      - ".github/workflows/ansible-lint.yml"
+      - "*.yml"
+  pull_request:
+    paths:
+      - "inventories/**"
+      - "roles/**"
+      - ".github/workflows/ansible-lint.yml"
+      - "*.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Lint Ansible Playbooks
+        uses: ansible-community/ansible-lint-action@main
+        with:
+          path: "/"

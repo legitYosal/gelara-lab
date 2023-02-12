@@ -1,0 +1,10 @@
+exclude_paths:
+  - ansible_collections/**
+  - ansible_collections/*
+  - ansible_collections/
+  - roles/ansible-github-actions-runner/**
+  - roles/ansible-github-actions-runner/*
+  - roles/ansible-github-actions-runner/
+  - apps/**
+  - apps/*
+  - apps/
