@@ -31,10 +31,9 @@
       MARIADB_GALERA_CLUSTER_BOOTSTRAP: "{{ bootstrap_cluster | default('no') }}"
       MARIADB_REPLICATION_USER: "replication"
       MARIADB_REPLICATION_PASSWORD: "{{ mariadb_replication_password }}"
-      MARIADB_GALERA_CLUSTER_ADDRESS: >-
-        "gcomm://{% for host in groups['maria'][:-1] %}\
-        {{ hostvars[host].ansible_host }},{% endfor %}\
-        {{ hostvars[groups['maria'][-1]].ansible_host }}"
+      MARIADB_GALERA_CLUSTER_ADDRESS: "gcomm://{% for host in groups['maria'][:-1] %}\
+                                      {{ hostvars[host].ansible_host }},{% endfor %}\
+                                      {{ hostvars[groups['maria'][-1]].ansible_host }}"
     healthcheck:
       test: ['CMD', '/opt/bitnami/scripts/mariadb-galera/healthcheck.sh']
       interval: 15s

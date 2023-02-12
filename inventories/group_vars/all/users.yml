@@ -1,7 +1,6 @@
 ---
 add_user_keys:
-  - >-
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDlJwb\
+  - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDlJwb\
     /DmdtIgNn69wQfGcsRKCEycPULCl8rPjD06x0497ixtn\
     c5kFIpvyerKbqtMa/zGIb9ymcPOdX3dwHRpUx2a8KpI6\
     C0RJOQxpaabE1G+Mg4RpPvsgQ4tkwvrIIAcT199XGtPT\
