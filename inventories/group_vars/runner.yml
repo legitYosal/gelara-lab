@@ -1,7 +1,7 @@
 ---
 
-gh_runner_config_url: https://github.com/legitYosal/gelara-lab
-gh_runner_config_token: !vault |
+github_url_https: https://github.com/legitYosal/gelara-lab
+runner_token: !vault |
   $ANSIBLE_VAULT;1.1;AES256
   33396666666336613663373064653664653630656264643866376465616461336431363534303138
   3739653362623338663366653366313432336339623932640a393038343235363831623266646237

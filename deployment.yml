@@ -76,8 +76,8 @@
     gh_runner_config_labels:
       - linux
       - self-hosted
-    gh_runner_config_url: "{{ gh_runner_config_url }}"
-    gh_runner_config_token: "{{ gh_runner_config_token }}"
+    gh_runner_config_url: "{{ github_url_https }}"
+    gh_runner_config_token: "{{ runner_token }}"
   tags:
     - runner
     - ci/cd
