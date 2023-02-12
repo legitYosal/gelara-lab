@@ -40,5 +40,5 @@ jobs:
 
       - name: Push image
         run: |
-          docker push 
+          docker push ${{steps.set_registry_hostname.outputs.registry_hostname}}:5000/db-exporter:latest
 
