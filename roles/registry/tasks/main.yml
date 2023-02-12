@@ -22,7 +22,7 @@
     #   retries: 6
 
 - name: Wait until registry is available
-  ansible.builtin.wait_for: 
+  ansible.builtin.wait_for:
     host: "{{ hostvars[inventory_hostname].ansible_host }}"
     port: 5000
     delay: 5

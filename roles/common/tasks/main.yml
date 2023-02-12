@@ -18,10 +18,10 @@
     key: "{{ item }}"
   with_items: "{{ add_user_keys }}"
 
-- name: fix broken apt
+- name: Fix broken apt
   ansible.builtin.apt:
     state: fixed
-  
+
 - name: Update apt-cache
   ansible.builtin.apt:
     update_cache: true

@@ -5,6 +5,7 @@
     path: "{{ item }}"
     state: directory
     owner: 1001
+    mode: 0755
   loop:
     - /etc/prometheus
     - /etc/prometheus/data
@@ -33,7 +34,7 @@
     #   retries: 6
 
 - name: Wait until prometheus is available
-  ansible.builtin.wait_for: 
+  ansible.builtin.wait_for:
     host: "{{ hostvars[inventory_hostname].ansible_host }}"
     port: 9090
     delay: 5

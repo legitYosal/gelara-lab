@@ -9,14 +9,14 @@
     - forwarding
 
 - name: Setup default route
-  hosts: 
+  hosts:
     - maria
     - monitoring
     - runner
     - registry
   become: true
   roles:
-    - default-gateway
+    - default_gateway
   tags:
     - default-gateway
 
@@ -36,7 +36,7 @@
   tags:
     - docker
 
-- name: Bootstrap cluster 
+- name: Bootstrap cluster
   hosts: maria[0]
   become: true
   roles:
@@ -66,11 +66,7 @@
   tags:
     - registry
     - ci/cd
-- name: test linting error
-  tasks:
-        - name:
-          copy:
-            dest: 32323
+
 - name: Deploy github actions runner
   hosts: runner
   become: true
@@ -100,7 +96,7 @@
   become: true
   roles:
     - prometheus
-  tags: 
+  tags:
     - prometheus
     - monitoring
 

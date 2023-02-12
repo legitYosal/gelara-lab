@@ -3,7 +3,7 @@
   ansible.builtin.apt:
     name: docker.io
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Copy daemon.json for docker iran
   ansible.builtin.copy:

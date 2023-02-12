@@ -1,5 +1,5 @@
 ---
-- name: deploy node-exporter
+- name: Deploy node-exporter
   community.docker.docker_container:
     image: "{{ node_exporter_image }}"
     name: node-exporter

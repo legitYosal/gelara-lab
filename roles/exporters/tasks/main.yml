@@ -1,4 +1,4 @@
 ---
-- name: deploy node-exporter
+- name: Deploy node-exporter
   ansible.builtin.import_tasks: node-exporter.yml
   tags: node-exporter
