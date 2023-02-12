@@ -5,12 +5,11 @@
     state: present
     update_cache: true
 
-- name: Copy daemon.json for docker iran
-  ansible.builtin.copy:
-    src: "daemon-iran.json"
+- name: Template daemon.json for docker iran
+  ansible.builtin.template:
+    src: "daemon.json.j2"
     dest: "/etc/docker/daemon.json"
     owner: root
     group: root
     mode: "0644"
   notify: Restart docker service
-  when: host_in_iran

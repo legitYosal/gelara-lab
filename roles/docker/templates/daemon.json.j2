@@ -1,0 +1,6 @@
+{
+{% if host_in_iran %}
+    "registry-mirrors": ["https://registry.docker.ir"],
+{% endif %}
+    "insecure-registries" : ["http://{{ groups['registry'].0 }}:5000"]
+}
