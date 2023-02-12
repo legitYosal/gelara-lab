@@ -36,7 +36,7 @@ jobs:
       - name: Build image
         working-directory: ./apps/db-exporter
         run: |
-          docker build -t ${{steps.set_registry_hostname.outputs.registry_hostname}}:5000/db-exporter:latest
+          docker build -t ${{steps.set_registry_hostname.outputs.registry_hostname}}:5000/db-exporter:latest .
 
       - name: Push image
         run: |
