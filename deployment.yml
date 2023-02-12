@@ -71,7 +71,7 @@
   hosts: runner
   become: true
   roles:
-    ansible-github-actions-runner
+    - ansible-github-actions-runner
   vars:
     gh_runner_config_labels:
       - linux
