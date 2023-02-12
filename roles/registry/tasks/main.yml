@@ -1,0 +1,28 @@
+---
+- name: Create directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0777
+  loop:
+    - /etc/registry
+    - /etc/registry/data
+
+- name: Setup registry
+  community.docker.docker_container:
+    name: "registry"
+    image: "{{ registry_image }}"
+    network_mode: host
+    volumes:
+      - /etc/registry/data:/var/lib/registry:rw
+    # healthcheck:
+    #   test: ['CMD', '/opt/bitnami/scripts/registry/healthcheck.sh']
+    #   interval: 15s
+    #   timeout: 5s
+    #   retries: 6
+
+- name: Wait until registry is available
+  ansible.builtin.wait_for: 
+    host: "{{ hostvars[inventory_hostname].ansible_host }}"
+    port: 5000
+    delay: 5

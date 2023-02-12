@@ -16,8 +16,8 @@ pip install -r requirements.txt
 
 Bootstrap cluster:  
 ```
-ansible-playbook -i inventories/ini facts.yml
-ansible-playbook -i inventories/ini deployment.yml --ask-vault-pass
+ansible-playbook -i inventories/hosts.ini facts.yml
+ansible-playbook -i inventories/hosts.ini deployment.yml --ask-vault-pass
 ```
 
 cluster map:

@@ -13,3 +13,6 @@
 [submodule "ansible_collections/community/grafana"]
 	path = ansible_collections/community/grafana
 	url = https://github.com/ansible-collections/community.grafana.git
+[submodule "roles/ansible-github-actions-runner"]
+	path = roles/ansible-github-actions-runner
+	url = https://github.com/macunha1/ansible-github-actions-runner.git

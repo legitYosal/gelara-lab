@@ -56,6 +56,30 @@
     - masters
     - maria
 
+- name: Deploy private registry
+  hosts: registry
+  become: true
+  roles:
+    - registry
+  tags:
+    - registry
+    - ci/cd
+
+- name: Deploy github actions runner
+  hosts: runner
+  become: true
+  roles:
+    ansible-github-actions-runner
+  vars:
+    gh_runner_config_labels:
+      - linux
+      - self-hosted
+    gh_runner_config_url: "{{ gh_runner_config_url }}"
+    gh_runner_config_token: "{{ gh_runner_config_token }}"
+  tags:
+    - runner
+    - ci/cd
+
 - name: Install exporters
   hosts: all
   become: true
