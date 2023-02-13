@@ -11,7 +11,7 @@
 
 - name: Copy certs
   ansible.builtin.template:
-    src: "{{ item }}.j2"
+    src: "certs/{{ item }}.j2"
     dest: "/etc/haproxy/certs/{{ item }}"
     owner: root
     group: root
