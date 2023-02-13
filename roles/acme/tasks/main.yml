@@ -1,0 +1,16 @@
+---
+- name: Check if key file exists
+  become: true
+  ansible.builtin.stat:
+    path: /root/private.key
+  register: key_result
+
+- name: Check if cert file exists
+  become: true
+  ansible.builtin.stat:
+    path: /root/cert.crt
+  register: crt_result
+
+- name: Generate certificate
+  ansible.builtin.import_tasks: generate.yml
+  when: not key_result.stat.exists or not crt_result.stat.exists

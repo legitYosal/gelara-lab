@@ -1,0 +1,10 @@
+---
+- name: Generate a pair of new certificates
+  hosts: lb[0]
+  become: true
+  roles:
+    - acme
+  tags:
+    - acme
+  vars:
+    domain: "{{ grafana_domain }}"

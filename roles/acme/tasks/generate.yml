@@ -1,0 +1,40 @@
+---
+- name: Install required packages
+  become: true
+  ansible.builtin.apt:
+    name: socat
+    state: present
+
+- name: Download acme installer
+  ansible.builtin.get_url:
+    url: "https://get.acme.sh"
+    dest: "/tmp/acme.sh"
+    mode: "0777"
+  become: true
+  delegate_to: localhost
+  run_once: true
+  
+- name: Execute acme installer
+  become: true
+  ansible.builtin.script: "/tmp/acme.sh"
+  register: result
+
+- name: Show script result
+  ansible.builtin.debug:
+    msg: "{{ result }}"
+
+- name: Set authority
+  become: true
+  ansible.builtin.command: "/root/.acme.sh/acme.sh --set-default-ca --server letsencrypt"
+
+- name: Register email
+  become: true
+  ansible.builtin.command: "/root/.acme.sh/acme.sh --register-account -m flaslnm@gmail.com"
+  
+- name: Start challenge
+  become: true
+  ansible.builtin.command: '/root/.acme.sh/acme.sh --issue -d {{ domain }} --standalone --force'
+
+- name: Save certs
+  become: true
+  ansible.builtin.command: "/root/.acme.sh/acme.sh --installcert -d {{ domain }} --key-file /root/private.key --fullchain-file /root/cert.crt"

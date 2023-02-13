@@ -15,7 +15,6 @@ userlist admincred
 
 frontend grafana_frontend
     bind *:3000
-    mode http
     default_backend grafana_backend
 backend grafana_backend
     server grafana {{ hostvars[groups['monitoring'].0].ansible_host }}:3000 check
