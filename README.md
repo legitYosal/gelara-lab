@@ -25,7 +25,7 @@ cluster map:
 
                                         access -grafana
                                                -prometheus
-            ┼                       │  │
+                                    │  │
                                     │  │
                                     │  │
                                    ┌▼──▼┐
