@@ -30,6 +30,7 @@
       MARIADB_GALERA_MARIABACKUP_USER: "backup"
       MARIADB_GALERA_MARIABACKUP_PASSWORD: "{{ mariadb_backup_password }}"
       MARIADB_GALERA_CLUSTER_BOOTSTRAP: "{{ bootstrap_cluster | default('no') }}"
+      MARIADB_GALERA_FORCE_SAFETOBOOTSTRAP: "{{ bootstrap_cluster | default('no') }}"
       MARIADB_REPLICATION_USER: "replication"
       MARIADB_REPLICATION_PASSWORD: "{{ mariadb_replication_password }}"
       MARIADB_GALERA_CLUSTER_ADDRESS: "gcomm://{% for host in groups['maria'][:-1] %}\
