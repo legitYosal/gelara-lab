@@ -23,7 +23,6 @@ frontend grafana_frontend
 backend grafana_backend
     mode http
     option forwardfor
-    option httpchk HEAD / HTTP/1.1\r\nHost:localhost
     server grafana {{ hostvars[groups['monitoring'].0].ansible_host }}:3000 check
     http-request set-header X-Forwarded-Port %[dst_port]
     http-request add-header X-Forwarded-Proto https if { ssl_fc }

@@ -28,6 +28,12 @@
     mode: 0644
   register: config_template
 
+- name: Privileged ports
+  ansible.posix.sysctl:
+    name: net.ipv4.ip_unprivileged_port_start
+    value: '0'
+    state: present
+
 - name: Setup haproxy
   become: true
   community.docker.docker_container:
