@@ -12,6 +12,7 @@
   community.docker.docker_container:
     name: "registry"
     image: "{{ registry_image }}"
+    restart_policy: unless-stopped
     network_mode: host
     volumes:
       - /etc/registry/data:/var/lib/registry:rw

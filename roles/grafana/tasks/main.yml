@@ -11,6 +11,7 @@
 - name: Setup grafana
   community.docker.docker_container:
     name: "grafana"
+    restart_policy: unless-stopped
     image: "{{ grafana_image }}"
     network_mode: host
     volumes:

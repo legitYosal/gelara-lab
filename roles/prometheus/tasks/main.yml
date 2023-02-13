@@ -22,6 +22,7 @@
   community.docker.docker_container:
     name: "prometheus"
     image: "{{ prometheus_image }}"
+    restart_policy: unless-stopped
     network_mode: host
     restart: "{{ config_template.changed }}"
     volumes:

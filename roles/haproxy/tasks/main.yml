@@ -21,6 +21,7 @@
     name: "haproxy"
     image: "{{ haproxy_image }}"
     network_mode: host
+    restart_policy: unless-stopped
     restart: "{{ config_template.changed }}"
     volumes:
       - /etc/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
