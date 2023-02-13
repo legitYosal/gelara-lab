@@ -14,9 +14,11 @@ userlist admincred
 	user admin password {{ monitoring_admin_password | string | password_hash('sha256') }}
 
 frontend grafana_frontend
-    bind *:3000
+    bind *:3000 ssl crt /etc/haproxy/certs/grafana.pem alpn h2,http/1.1
+    http-request redirect scheme https unless { ssl_fc }
     default_backend grafana_backend
 backend grafana_backend
+    option ssl-hello-chk
     server grafana {{ hostvars[groups['monitoring'].0].ansible_host }}:3000 check
 
 frontend prometheus_frontend

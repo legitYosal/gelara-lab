@@ -7,6 +7,18 @@
     mode: 0755
   loop:
     - /etc/haproxy
+    - /etc/haproxy/certs
+
+- name: Copy certs
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "/etc/haproxy/certs/{{ item }}"
+    owner: root
+    group: root
+    mode: "0666"
+  loop:
+    - grafana.pem
+  register: certs_template
 
 - name: Configuring haproxy
   become: true
@@ -22,7 +34,7 @@
     image: "{{ haproxy_image }}"
     network_mode: host
     restart_policy: unless-stopped
-    restart: "{{ config_template.changed }}"
+    restart: "{{ config_template.changed or certs_template.changed }}"
     volumes:
       - /etc/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     # healthcheck:
