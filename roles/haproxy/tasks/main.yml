@@ -36,7 +36,8 @@
     restart_policy: unless-stopped
     restart: "{{ config_template.changed or certs_template.changed }}"
     volumes:
-      - /etc/haproxy:/usr/local/etc/haproxy:ro
+      - /etc/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - /etc/haproxy/certs:/etc/haproxy/certs:ro
     # healthcheck:
     #   test: ['CMD', '/opt/bitnami/scripts/haproxy/healthcheck.sh']
     #   interval: 15s
