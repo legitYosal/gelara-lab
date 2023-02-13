@@ -29,6 +29,7 @@
   register: config_template
 
 - name: Setup haproxy
+  become: true
   community.docker.docker_container:
     name: "haproxy"
     image: "{{ haproxy_image }}"
