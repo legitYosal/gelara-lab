@@ -18,7 +18,6 @@ frontend grafana_frontend
     http-request redirect scheme https unless { ssl_fc }
     default_backend grafana_backend
 backend grafana_backend
-    option ssl-hello-chk
     server grafana {{ hostvars[groups['monitoring'].0].ansible_host }}:3000 check
 
 frontend prometheus_frontend
