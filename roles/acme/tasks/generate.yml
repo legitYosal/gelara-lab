@@ -13,7 +13,7 @@
   become: true
   delegate_to: localhost
   run_once: true
-  
+
 - name: Execute acme installer
   become: true
   ansible.builtin.script: "/tmp/acme.sh"
@@ -26,15 +26,23 @@
 - name: Set authority
   become: true
   ansible.builtin.command: "/root/.acme.sh/acme.sh --set-default-ca --server letsencrypt"
+  register: output
+  changed_when: output.rc != 0
 
 - name: Register email
   become: true
   ansible.builtin.command: "/root/.acme.sh/acme.sh --register-account -m flaslnm@gmail.com"
-  
+  register: output
+  changed_when: output.rc != 0
+
 - name: Start challenge
   become: true
   ansible.builtin.command: '/root/.acme.sh/acme.sh --issue -d {{ domain }} --standalone --force'
+  register: output
+  changed_when: output.rc != 0
 
 - name: Save certs
   become: true
   ansible.builtin.command: "/root/.acme.sh/acme.sh --installcert -d {{ domain }} --key-file /root/private.key --fullchain-file /root/cert.crt"
+  register: output
+  changed_when: output.rc != 0
