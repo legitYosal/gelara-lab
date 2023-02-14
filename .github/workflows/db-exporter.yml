@@ -5,9 +5,9 @@ on:
     branches:
       - master
     paths:
-      - ".github/workflows/db-exporter.yml"
-      - ./apps/db-exporter/**"
-      - ./apps/db-exporter/*"
+      - '.github/workflows/db-exporter.yml'
+      - './apps/db-exporter/**'
+      - './apps/db-exporter/*'
 
 jobs:
   build:

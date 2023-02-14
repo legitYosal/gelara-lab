@@ -5,9 +5,9 @@ on:
     branches:
       - master
     paths:
-      - ".github/workflows/emitter.yml"
-      - ./apps/emitter/**"
-      - ./apps/emitter/*"
+      - '.github/workflows/emitter.yml'
+      - './apps/emitter/**'
+      - './apps/emitter/*'
 
 jobs:
   build:

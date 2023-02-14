@@ -3,16 +3,16 @@ name: Ansible Lint
 on:
   push:
     paths:
-      - "inventories/**"
-      - "roles/**"
-      - ".github/workflows/ansible-lint.yml"
-      - "*.yml"
+      - 'inventories/**'
+      - 'roles/**'
+      - '.github/workflows/ansible-lint.yml'
+      - '*.yml'
   pull_request:
     paths:
-      - "inventories/**"
-      - "roles/**"
-      - ".github/workflows/ansible-lint.yml"
-      - "*.yml"
+      - 'inventories/**'
+      - 'roles/**'
+      - '.github/workflows/ansible-lint.yml'
+      - '*.yml'
 
 jobs:
   lint:
