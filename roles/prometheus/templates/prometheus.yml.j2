@@ -16,3 +16,13 @@ scrape_configs:
           instance: {{ host }}
           address: {{ hostvars[host].ansible_host }}:9100
 {% endfor %}
+  - job_name: 'mysql'
+    params:
+      auth_module: client.servers
+    static_configs:
+{% for host in groups['maria'] %}
+      - targets: ['{{ hostvars[host].ansible_host }}:9104']
+        labels:
+          instance: {{ host }}
+          address: {{ hostvars[host].ansible_host }}:9100
+{% endfor %}
