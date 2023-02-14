@@ -9,6 +9,6 @@
       MARIADB_DATABASE: "default"
       MARIADB_PASSWORD: "{{ mariadb_password }}"
       MARIADB_HOST: "{{ hostvars[groups['maria'].0].ansible_host }}"
-      MARIADB_PORT: 3306
+      MARIADB_PORT: "3306"
     restart_policy: always
   with_sequence: "0-{{ emitter_numbers }}"
