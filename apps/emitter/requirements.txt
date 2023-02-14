@@ -1,1 +1,1 @@
-mariadb
+mysql-connector-python
