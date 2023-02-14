@@ -19,6 +19,8 @@
     group: 1001
     mode: "0755"
   register: script_template
+  when: bootstrap_cluster | default('no') == 'yes'
+  run_once: true
 
 - name: Setup maria
   community.docker.docker_container:
@@ -26,7 +28,7 @@
     image: "{{ mariadb_image }}"
     network_mode: host
     restart_policy: unless-stopped
-    restart: "{{ script_template.changed }}"
+    restart: "{{ script_template.changed | default(False) }}"
     volumes:
       - /etc/maria/data:/bitnami/mariadb:rw
       - /etc/maria/docker-entrypoint-startdb.d:/docker-entrypoint-startdb.d:ro
