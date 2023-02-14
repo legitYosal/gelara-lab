@@ -1,0 +1,15 @@
+
+CREATE USER 'mysqld_exporter'@'localhost' IDENTIFIED BY '{{ mariadb_exporter_password }}' WITH MAX_USER_CONNECTIONS 2;
+
+GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'mysqld_exporter'@'localhost';
+
+FLUSH PRIVILEGES;
+
+USE default;
+CREATE TABLE IF NOT EXISTS `test_table` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+) ENGINE=InnoDB AUTO_INCREMENT=4;
+
+FLUSH PRIVILEGES;
