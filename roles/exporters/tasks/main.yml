@@ -2,3 +2,8 @@
 - name: Deploy node-exporter
   ansible.builtin.import_tasks: node-exporter.yml
   tags: node-exporter
+
+- name: Deploy mysql exporter
+  ansible.builtin.import_tasks: mysql-exporter.yml
+  tags: mysql-exporter
+  when: inventory_hostname in groups['maria']

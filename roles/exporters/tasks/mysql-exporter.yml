@@ -1,0 +1,28 @@
+- name: Deploy mysql-exporter
+  community.docker.docker_container:
+    image: "{{ mysql_exporter_image }}"
+    name: mysql-exporter
+    network_mode: host
+    restart_policy: unless-stopped
+    command:
+      - --exporter.lock_wait_timeout=1
+      - --collect.mysql.user
+      - --collect.global_status
+      - --collect.info_schema.tables
+      - --collect.info_schema.tablestats
+      - --collect.info_schema.innodb_metrics
+      - --collect.auto_increment.columns
+      - --collect.info_schema.processlist
+      - --collect.binlog_size
+      - --collect.global_variables
+      - --collect.info_schema.query_response_time
+      - --collect.info_schema.userstats
+      - --collect.perf_schema.tablelocks
+      - --collect.perf_schema.file_events
+      - --collect.perf_schema.eventswaits
+      - --collect.perf_schema.indexiowaits
+      - --collect.perf_schema.tableiowaits
+      - --log.level=debug
+      - --tls.insecure-skip-verify
+    env:
+      DATA_SOURCE_NAME: "root:{{ mariadb_root_password }}@(db:3306)/"
