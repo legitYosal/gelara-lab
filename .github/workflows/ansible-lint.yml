@@ -13,7 +13,6 @@ on:
       - "roles/**"
       - ".github/workflows/ansible-lint.yml"
       - "*.yml"
-  workflow_dispatch:
 
 jobs:
   lint:

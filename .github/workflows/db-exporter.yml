@@ -8,7 +8,6 @@ on:
       - ".github/workflows/db-exporter.yml"
       - ./apps/db-exporter/**"
       - ./apps/db-exporter/*"
-  workflow_dispatch:
 
 jobs:
   build:
