@@ -1,1 +1,7 @@
 ---
+- name: Deploy emitter instances
+  community.docker.docker_container:
+    image: "{{ groups['runner'].0 }}:5000/emitter:latest"
+    name: "mariadb-emitter-{{ item }}"
+    restart_policy: always
+  with_sequence: "0-{{ emitter_numbers }}"

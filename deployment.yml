@@ -116,3 +116,11 @@
     - haproxy
   tags:
     - haproxy
+
+- name: Deploy emitter instances
+  hosts: gateway[0]
+  become: true
+  roles:
+    - emitter
+  tags:
+    - emitter
