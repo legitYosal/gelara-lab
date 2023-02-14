@@ -51,3 +51,13 @@
     dashboard_id: 1860
     dashboard_revision: 30
   no_log: true
+
+- name: Import Grafana dashboard mysql exporter
+  community.grafana.grafana_dashboard:
+    grafana_url: 'http://{{ hostvars[inventory_hostname].ansible_host }}:3000'
+    grafana_user: 'admin'
+    grafana_password: '{{ monitoring_admin_password }}'
+    folder: General
+    dashboard_id: 14057
+    dashboard_revision: 1
+  no_log: true
