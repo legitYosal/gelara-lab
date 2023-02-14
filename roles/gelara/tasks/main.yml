@@ -11,17 +11,6 @@
     - /etc/maria/data
     - /etc/maria/docker-entrypoint-startdb.d
 
-- name: Template SQL init script
-  ansible.builtin.template:
-    src: "init-script.sql.j2"
-    dest: "/etc/maria/docker-entrypoint-startdb.d/init-script.sql"
-    owner: 1001
-    group: 1001
-    mode: "0755"
-  register: script_template
-  when: bootstrap_cluster | default('no') == 'yes'
-  run_once: true
-
 - name: Setup maria
   community.docker.docker_container:
     name: "mariadb"
