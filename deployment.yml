@@ -122,5 +122,7 @@
   become: true
   roles:
     - emitter
+  vars:
+    emitter_numbers: 4
   tags:
     - emitter
