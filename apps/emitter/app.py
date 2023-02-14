@@ -1,20 +1,18 @@
-from datetime import datetime
+# Module Imports
+import mariadb
+import sys
 
-def get_database():
-    pass
-    
-if __name__ == '__main__':    
-    test_db = get_database()
-    from time import sleep
-    errors = 0
-    i = 0
-    while True:
-        sleep(0.1)
-        i += 1
-        try:
-            print(datetime.now().strftime('%Y-%M-%d %H:%m:%S'), ' Inserted, errors: ', str(errors))
-        except Exception as e:
-            print('******** Exception:')
-            print(e)
-            errors += 1
-            test_db = get_database()
+try:
+    conn = mariadb.connect(
+        user="db_user",
+        password="db_user_passwd",
+        host="192.0.2.1",
+        port=3306,
+        database="employees"
+
+    )
+except mariadb.Error as e:
+    print(f"Error connecting to MariaDB Platform: {e}")
+    sys.exit(1)
+
+cur = conn.cursor()

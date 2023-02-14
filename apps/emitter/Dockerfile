@@ -4,7 +4,7 @@ ENV PYTHONUNBUFFERED=1
 
 USER root
 
-RUN apt-get update && apt-get install -y apt-utils python3-dev
+RUN apt-get update && apt-get install -y apt-utils python3-dev libmariadb3 libmariadb-dev
 
 RUN mkdir /app
 
