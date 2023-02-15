@@ -38,9 +38,14 @@ class Collector:
                 wsrep_stats_raw = cursor.fetchall()
                 wsrep_stats = {i[0]: i[1] for i in wsrep_stats_raw}
                 self.wsrep_cluster_size.set(wsrep_stats['wsrep_cluster_size'])
-                self.wsrep_cluster_status.labels(
-                    node_status=wsrep_stats['wsrep_cluster_status']
-                ).set(1)
+                if wsrep_stats['wsrep_cluster_status'].lower() == 'primary':
+                    self.wsrep_cluster_status.labels(
+                        node_status=wsrep_stats['wsrep_cluster_status']
+                    ).set(1)
+                else:
+                    self.wsrep_cluster_status.labels(
+                        node_status=wsrep_stats['wsrep_cluster_status']
+                    ).set(0)
         except Error as e:
             print("Error while connecting ", e)
         finally:
