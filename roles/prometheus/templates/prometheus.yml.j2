@@ -22,5 +22,13 @@ scrape_configs:
       - targets: ['{{ hostvars[host].ansible_host }}:9104']
         labels:
           instance: {{ host }}
-          address: {{ hostvars[host].ansible_host }}:9100
+          address: {{ hostvars[host].ansible_host }}:9104
+{% endfor %}
+  - job_name: 'db-exporter'
+    static_configs:
+{% for host in groups['maria'] %}
+      - targets: ['{{ hostvars[host].ansible_host }}:8185']
+        labels:
+          instance: {{ host }}
+          address: {{ hostvars[host].ansible_host }}:8185
 {% endfor %}
