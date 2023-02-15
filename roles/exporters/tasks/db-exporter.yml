@@ -1,0 +1,12 @@
+---
+- name: Deploy db instances
+  community.docker.docker_container:
+    image: "{{ groups['runner'].0 }}:5000/db-exporter:latest"
+    name: "db-exporter"
+    pull: true
+    env:
+      MARIADB_USER: "default"
+      MARIADB_PASSWORD: "{{ mariadb_password }}"
+      MARIADB_HOST: "{{ hostvars[inventory_hostname].ansible_host }}"
+      MARIADB_PORT: "3306"
+    restart_policy: unless-stopped

@@ -6,8 +6,8 @@ on:
       - master
     paths:
       - '.github/workflows/emitter.yml'
-      - './apps/emitter/**'
-      - './apps/emitter/*'
+      - 'apps/emitter/**'
+      - 'apps/emitter/*'
 
 jobs:
   build:
