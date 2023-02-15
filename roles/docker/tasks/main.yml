@@ -11,5 +11,5 @@
     dest: "/etc/docker/daemon.json"
     owner: root
     group: root
-    mode: "0644"
+    mode: "0655"
   notify: Restart docker service
